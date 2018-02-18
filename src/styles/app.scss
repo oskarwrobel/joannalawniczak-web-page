@@ -1,0 +1,136 @@
+$mid: 1200px;
+$min: 500px;
+
+body, html {
+	height: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	color: #000;
+	background: #ffd4cf;
+	font-family: ArcaMajora, sans-serif;
+}
+
+@font-face {
+	font-family: 'ArcaMajora';
+	src:
+		url('../fonts/ArcaMajora3-Bold.woff2') format('woff2'),
+		url('../fonts/ArcaMajora3-Bold.woff') format('woff');
+}
+
+.wrapper {
+	position: relative;
+	min-height: 100%;
+	max-width: 2000px;
+	margin: 0 auto;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+
+	@media all and ( max-width: $mid ) {
+		flex-direction: column;
+	}
+}
+
+main {
+	text-transform: lowercase;
+	margin-left: 10%;
+	padding: 20px 0;
+	width: 400px;
+
+	.eye {
+		display: inline-block;
+		width: 71px;
+		height: 40px;
+		background: url( ../images/eye.svg ) 0 0 no-repeat;
+		background-size: auto 40px;
+		animation: open .05s steps( 2 ) forwards;
+		margin-bottom: 15px;
+
+		&:hover {
+			animation: close .05s steps( 2 ) forwards;
+		}
+	}
+
+	@keyframes close {
+		0% { background-position-x: 0; }
+		100% { background-position-x: -142px; }
+	}
+
+	@keyframes open {
+		0% { background-position-x: -142px; }
+		100% { background-position-x: 0; }
+	}
+
+	h1 {
+		margin: 0 0 40px;
+		font-size: 40px;
+		font-weight: bold;
+	}
+
+	ul, li {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+
+		li {
+			display: inline-block;
+			margin-right: 20px;
+			font-size: 18px;
+
+			&:last-child {
+				margin: 0;
+			}
+
+			a {
+				color: #000;
+
+				&:hover {
+					text-decoration: none;
+				}
+			}
+		}
+	}
+
+	@media all and ( max-width: $mid ) {
+		width: 400px;
+		text-align: center;
+		margin-left: 0;
+	}
+
+	@media all and ( max-width: $min ) {
+		width: 80%;
+
+		ul li {
+			display: block;
+			margin: 0 0 15px;
+		}
+	}
+}
+
+.illustration {
+	position: absolute;
+	right: -10px;
+	top: 10%;
+	bottom: 0;
+	width: 70%;
+	display: flex;
+	align-items: center;
+
+	img {
+		display: block;
+		width: 100%;
+	}
+
+	@media all and ( max-width: $mid ) {
+		position: static;
+		padding-top: 70px;
+		width: 100%;
+	}
+
+	@media all and ( max-width: $min ) {
+		padding-top: 30px;
+	}
+}

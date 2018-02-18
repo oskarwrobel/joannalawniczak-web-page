@@ -46,7 +46,7 @@
     ]
   },
   "eslintIgnore": [
-    "public/dist/**",
-    "public/src/scripts/analytics.js"
+    "dist/**",
+    "src/scripts/analytics.js"
   ]
 }
