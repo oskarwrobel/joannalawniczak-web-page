@@ -1,0 +1,55 @@
+{
+  "name": "joannalawniczak",
+  "version": "0.0.1",
+  "description": "Joanna Lawniczak home page.",
+  "scripts": {
+    "lint": "eslint --quiet '**/*.js'",
+    "precommit": "lint-staged",
+    "start": "nodemon --ignore public --ignore node_modules --ignore tests ./app.js",
+    "test": "NODE_ENV=test mocha tests/**/*",
+    "build": "webpack --config dev/webpack.config.js",
+    "build:production": "webpack --config dev/webpack.config.js --env.minify",
+    "deploy": "node ./dev/deploy.js"
+  },
+  "author": "Oskar Wrobel",
+  "dependencies": {
+    "chalk": "^2.3.0",
+    "glob": "^7.1.2",
+    "npm": "^5.6.0",
+    "prettyjson": "^1.2.1",
+    "pug": "^2.0.0-rc.4",
+    "vision": "^5.3.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-minify-webpack-plugin": "^0.2.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "chai": "^4.1.2",
+    "css-loader": "^0.28.7",
+    "eslint": "^4.14.0",
+    "eslint-config-ckeditor5": "^1.0.7",
+    "eslint-plugin-react": "^7.5.1",
+    "file-loader": "^1.1.6",
+    "husky": "^0.14.3",
+    "imports-loader": "^0.7.1",
+    "lint-staged": "^6.0.0",
+    "mkdirp": "^0.5.1",
+    "mocha": "^4.1.0",
+    "node-sass": "^4.7.2",
+    "node-ssh": "^5.0.0",
+    "sass-loader": "^6.0.6",
+    "shelljs": "^0.7.8",
+    "style-loader": "^0.19.1",
+    "url-loader": "^0.6.2",
+    "webpack": "^3.10.0"
+  },
+  "lint-staged": {
+    "**/*.js": [
+      "eslint --quiet"
+    ]
+  },
+  "eslintIgnore": [
+    "public/dist/**"
+  ]
+}
