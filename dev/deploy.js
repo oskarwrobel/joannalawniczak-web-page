@@ -1,33 +1,20 @@
-#!/usr/bin/env node
+'use strict';
 
-const shell = require( 'shelljs' );
-const NodeSSH = require( 'node-ssh' );
+/* eslint-env node */
+
 const path = require( 'path' );
+const deploy = require( 'deploy-tools/src/deploy' );
 
-const ssh = new NodeSSH();
-
-const dest = 'domains/joannalawniczak.com';
-const localTmp = path.join( process.cwd(), 'dist' );
-const remoteTmp = path.join( dest, 'tmp' );
-
-// Build app.
-shell.exec( 'rm -rf ' + path.join( process.cwd(), 'dist' ) );
-shell.exec( 'npm run build:production' );
-
-// Copying files to the remote.
-shell.exec( `rsync -a ${ path.join( localTmp, '/' ) } oskarwrobel@s8.mydevil.net:${ remoteTmp }` );
-
-ssh.connect( {
-	host: 's8.mydevil.net',
+deploy( {
 	username: 'oskarwrobel',
-	privateKey: '/Users/oskarwrobel/.ssh/id_rsa'
+	host: 's8.mydevil.net',
+	privateKey: '/Users/oskarwrobel/.ssh/id_rsa',
+	src: path.join( process.cwd(), 'dist' ),
+	dest: 'domains/oskarwrobel.pl/public_html'
 } )
-	.then( ssh => {
-		return Promise.resolve()
-			.then( () => ssh.execCommand( `rm -rf ${ path.join( dest, 'public_html' ) }` ) )
-			.then( output => console.log( output.stdout, output.stderr ) )
-			.then( () => ssh.execCommand( `mv ${ path.join( dest, 'tmp' ) } ${ path.join( dest, 'public_html' ) }` ) )
-			.then( output => console.log( output.stdout, output.stderr ) )
-			.then( () => ssh.connection.end() );
-	} )
-	.catch( err => console.log( err ) );
+	.then( () => console.log( 'Deploy succeed.' ) )
+	.catch( error => {
+		console.log( 'Deploy failed.' );
+		console.log( error );
+		process.exit( 1 );
+	} );
