@@ -3,11 +3,10 @@
 /* eslint-env node */
 
 const path = require( 'path' );
-const webpack = require( 'webpack' );
-const BabiliPlugin = require( 'babel-minify-webpack-plugin' );
-const ExtractTextPlugin = require( 'extract-text-webpack-plugin' );
+const { DefinePlugin } = require( 'webpack' );
+const { CleanWebpackPlugin } = require( 'clean-webpack-plugin' );
 const HtmlWebpackPlugin = require( 'html-webpack-plugin' );
-const CleanWebpackPlugin = require( 'clean-webpack-plugin' );
+const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 
 module.exports = ( env = {} ) => {
 	const entry = [
@@ -19,52 +18,29 @@ module.exports = ( env = {} ) => {
 	}
 
 	const webpackConfig = {
-		resolve: {
-			modules: [ 'node_modules' ],
-		},
-
 		entry,
 
 		output: {
+			filename: '[name].[contenthash].js',
 			path: path.join( process.cwd(), 'dist' ),
-			filename: '[hash].app.js',
-			publicPath: '/',
-			libraryTarget: 'umd',
-			umdNamedDefine: true,
-			library: 'app'
+			publicPath: '/'
 		},
 
 		module: {
 			rules: [
 				{
-					test: /\.js$/,
-					exclude: [ 'node_modules' ],
-					loader: 'babel-loader',
-					query: {
-						cacheDirectory: true
-					}
-				},
-				{
 					test: /\.scss$/,
-					use: ExtractTextPlugin.extract( {
-						publicPath: './',
-						fallback: 'style-loader',
-						use: [
-							{
-								loader: 'css-loader',
-								options: {
-									minimize: env.minify
-								}
-							},
-							{
-								loader: 'sass-loader'
-							}
-						]
-					} )
+					use: [
+						{
+							loader: MiniCssExtractPlugin.loader,
+						},
+						'css-loader',
+						'sass-loader'
+					]
 				},
 				{
 					test: /.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
-					use: 'file-loader?name=[name]-[hash:6].[ext]'
+					use: 'file-loader'
 				},
 				{
 					test: /\.html$/,
@@ -79,33 +55,18 @@ module.exports = ( env = {} ) => {
 		},
 
 		plugins: [
-			new CleanWebpackPlugin( [ 'dist/*.*' ], {
-				root: process.cwd()
-			} ),
-			new ExtractTextPlugin( '[hash].app.css' ),
+			new CleanWebpackPlugin(),
 			new HtmlWebpackPlugin( {
-				template: './src/index.html'
+				template: path.join( process.cwd(), 'src', 'index.html' )
+			} ),
+			new MiniCssExtractPlugin( {
+				filename: '[name].[contenthash].css'
+			} ),
+			new DefinePlugin( {
+				ANALYTICS: JSON.stringify( env.analytics )
 			} )
 		]
 	};
-
-	if ( env.minify ) {
-		webpackConfig.plugins = [
-			...webpackConfig.plugins,
-			new webpack.DefinePlugin( {
-				'process.env': {
-					'NODE_ENV': JSON.stringify( 'production' )
-				},
-				ANALYTICS: JSON.stringify( env.analytics )
-			} ),
-			new BabiliPlugin( null, { comments: false } ),
-			new webpack.optimize.ModuleConcatenationPlugin()
-		];
-	}
-
-	if ( env.sourcemaps ) {
-		webpackConfig.devtool = 'inline-source-map';
-	}
 
 	return webpackConfig;
 };
