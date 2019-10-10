@@ -1,28 +1,34 @@
 import '../styles/app.scss';
 
 let timeIn, timeOut;
-const eye = document.querySelector( '.eye' );
+const eyeElement = document.querySelector( '.eye' );
 
-eye.addEventListener( 'mouseenter', () => {
-	eye.classList.add( 'blink' );
-	clearInterval( timeIn, timeOut );
-} );
+eyeElement.addEventListener( 'mouseenter', closeEye );
+eyeElement.addEventListener( 'mouseleave', openEye );
 
-eye.addEventListener( 'mouseleave', () => {
-	eye.classList.remove( 'blink' );
-	blink();
-} );
+openEye();
 
-blink();
+// ---------------------------------------------------------------------------- //
 
-function blink( duration = 250, delay = random( 5000, 10000 ) ) {
+function openEye() {
+	eyeElement.classList.remove( 'eye-closed' );
+	startBlinking();
+}
+
+function closeEye() {
+	stopBlinking();
+	eyeElement.classList.add( 'eye-closed' );
+}
+
+function startBlinking( duration = 250, delay = random( 5000, 10000 ) ) {
 	timeIn = setTimeout( () => {
-		eye.classList.add( 'blink' );
-		timeOut = setTimeout( () => {
-			eye.classList.remove( 'blink' );
-			blink();
-		}, duration );
+		closeEye();
+		timeOut = setTimeout( openEye, duration );
 	}, delay );
+}
+
+function stopBlinking() {
+	clearInterval( timeIn, timeOut );
 }
 
 function random( min, max ) {

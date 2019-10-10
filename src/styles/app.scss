@@ -49,7 +49,7 @@ main {
 		animation: open .05s steps( 2 ) forwards;
 		margin-bottom: 15px;
 
-		&.blink {
+		&.eye-closed {
 			animation: close .05s steps( 2 ) forwards;
 		}
 	}
