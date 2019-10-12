@@ -20,7 +20,10 @@ function closeEye() {
 	eyeElement.classList.add( 'eye-closed' );
 }
 
-function startBlinking( duration = 250, delay = random( 5000, 10000 ) ) {
+function startBlinking( duration = 250, delay ) {
+	// Cannot be as a default value because of a minification bug.
+	delay = delay || random( 5000, 10000 );
+
 	timeIn = setTimeout( () => {
 		closeEye();
 		timeOut = setTimeout( openEye, duration );

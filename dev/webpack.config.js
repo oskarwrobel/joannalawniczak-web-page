@@ -17,7 +17,7 @@ module.exports = ( env = {} ) => {
 		entry.push( path.join( process.cwd(), 'src', 'scripts', 'analytics.js' ) );
 	}
 
-	const webpackConfig = {
+	return {
 		entry,
 
 		output: {
@@ -67,6 +67,4 @@ module.exports = ( env = {} ) => {
 			} )
 		]
 	};
-
-	return webpackConfig;
 };
