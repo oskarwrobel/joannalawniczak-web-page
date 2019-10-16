@@ -21,7 +21,7 @@ function closeEye() {
 }
 
 function startBlinking( duration = 250, delay ) {
-	// Cannot be as a default value because of a minification bug.
+	// Cannot be a default value because of a minification bug.
 	delay = delay || random( 5000, 10000 );
 
 	timeIn = setTimeout( () => {
