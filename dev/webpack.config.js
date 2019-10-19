@@ -9,16 +9,16 @@ const HtmlWebpackPlugin = require( 'html-webpack-plugin' );
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 
 module.exports = ( env = {} ) => {
-	const entry = [
-		path.join( process.cwd(), 'src', 'scripts', 'app.js' )
-	];
+	const main = [ path.join( process.cwd(), 'src', 'scripts', 'app.js' ) ];
+	const metropolis = [ path.join( process.cwd(), 'metropolis-web-page', 'src', 'scripts', 'app.js' ) ];
 
 	if ( env.analytics ) {
-		entry.push( path.join( process.cwd(), 'src', 'scripts', 'analytics.js' ) );
+		main.push( path.join( process.cwd(), 'src', 'scripts', 'analytics.js' ) );
+		metropolis.push( path.join( process.cwd(), 'src', 'scripts', 'analytics.js' ) );
 	}
 
 	return {
-		entry,
+		entry: { main, metropolis },
 
 		output: {
 			filename: '[name].[contenthash].js',
@@ -57,7 +57,13 @@ module.exports = ( env = {} ) => {
 		plugins: [
 			new CleanWebpackPlugin(),
 			new HtmlWebpackPlugin( {
+				chunks: [ 'main' ],
 				template: path.join( process.cwd(), 'src', 'index.html' )
+			} ),
+			new HtmlWebpackPlugin( {
+				chunks: [ 'metropolis' ],
+				template: path.join( process.cwd(), 'metropolis-web-page', 'src', 'index.html' ),
+				filename: 'metropolis.html'
 			} ),
 			new MiniCssExtractPlugin( {
 				filename: '[name].[contenthash].css'
