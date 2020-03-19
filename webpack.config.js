@@ -29,7 +29,7 @@ module.exports = ( env = {} ) => {
 					test: /\.scss$/,
 					use: [
 						{
-							loader: MiniCssExtractPlugin.loader,
+							loader: MiniCssExtractPlugin.loader
 						},
 						'css-loader',
 						'sass-loader'
@@ -42,10 +42,7 @@ module.exports = ( env = {} ) => {
 				{
 					test: /\.html$/,
 					use: {
-						loader: 'html-loader',
-						options: {
-							interpolate: true
-						}
+						loader: 'html-loader'
 					}
 				}
 			]
