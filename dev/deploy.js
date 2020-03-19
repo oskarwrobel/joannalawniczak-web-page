@@ -18,7 +18,7 @@ deploy( {
 	host,
 	privateKey,
 	execute( local, remote ) {
-		local( 'npm run build:production' );
+		local( 'npm run build:all' );
 
 		// Create directory structure if it is missing.
 		tmp.split( '/' ).reduce( ( result, part ) => {
