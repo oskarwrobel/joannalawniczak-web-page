@@ -8,7 +8,8 @@
     "build": "webpack --mode development",
     "build:production": "webpack --mode production --optimize-minimize --env.analytics=UA-11153361-29",
     "build:metropolis": "webpack --config 'metropolis-web-page/webpack.config.js' --mode production --optimize-minimize --env.analytics=UA-11153361-29",
-    "build:all": "npm run clean && npm run build:production && npm run build:metropolis",
+    "build:2020": "webpack --config '2020-live-illustration/webpack.config.js' --mode production --optimize-minimize --env.analytics=UA-11153361-29",
+    "build:all": "npm run clean && npm run build:production && npm run build:metropolis && npm run build:2020",
     "serve": "http-server ./dist/",
     "deploy": "npm run lint && node ./dev/deploy"
   },
