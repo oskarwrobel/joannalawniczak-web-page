@@ -1,3 +1,6 @@
 [submodule "metropolis-web-page"]
 	path = metropolis-web-page
 	url = git@github.com:oskarwrobel/metropolis-web-page.git
+[submodule "2020-live-illustration"]
+	path = 2020-live-illustration
+	url = git@github.com:oskarwrobel/2020-live-illustration.git
