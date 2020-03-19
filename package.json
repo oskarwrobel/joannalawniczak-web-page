@@ -41,7 +41,8 @@
   "eslintIgnore": [
     "dist/**",
     "src/scripts/analytics.js",
-    "metropolis-web-page"
+    "metropolis-web-page",
+    "2020-live-illustration"
   ],
   "husky": {
     "hooks": {
