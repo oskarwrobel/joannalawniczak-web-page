@@ -5,6 +5,7 @@
 const path = require( 'path' );
 const { DefinePlugin } = require( 'webpack' );
 const HtmlWebpackPlugin = require( 'html-webpack-plugin' );
+const CopyPlugin = require( 'copy-webpack-plugin' );
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 
 module.exports = ( env = {} ) => {
@@ -42,7 +43,23 @@ module.exports = ( env = {} ) => {
 				{
 					test: /\.html$/,
 					use: {
-						loader: 'html-loader'
+						loader: 'html-loader',
+						options: {
+							attributes: {
+								list: [
+									{
+										tag: 'img',
+										attribute: 'src',
+										type: 'src'
+									},
+									{
+										tag: 'link',
+										attribute: 'href',
+										type: 'src'
+									}
+								]
+							}
+						}
 					}
 				}
 			]
@@ -53,6 +70,9 @@ module.exports = ( env = {} ) => {
 				chunks: [ 'main' ],
 				template: path.join( process.cwd(), 'src', 'index.html' )
 			} ),
+			new CopyPlugin( [
+				{ from: path.join( process.cwd(), 'src', 'images', 'og-image.png' ), to: path.join( process.cwd(), 'dist' ) }
+			] ),
 			new MiniCssExtractPlugin( {
 				filename: '[name].[contenthash].css'
 			} ),
