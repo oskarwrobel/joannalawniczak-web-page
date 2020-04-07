@@ -1,4 +1,4 @@
-import '../styles/app.scss';
+import '../styles/app.css';
 
 let timeIn, timeOut;
 const eyeElement = document.querySelector( '.eye' );

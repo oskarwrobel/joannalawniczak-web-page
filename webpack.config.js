@@ -8,7 +8,9 @@ const HtmlWebpackPlugin = require( 'html-webpack-plugin' );
 const CopyPlugin = require( 'copy-webpack-plugin' );
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 
-module.exports = ( env = {} ) => {
+module.exports = ( env = {}, argv = {} ) => {
+	const isProduction = argv.mode === 'production';
+
 	const entry = [ path.join( process.cwd(), 'src', 'scripts', 'app.js' ) ];
 
 	if ( env.analytics ) {
@@ -24,16 +26,30 @@ module.exports = ( env = {} ) => {
 			publicPath: '/'
 		},
 
+		devtool: !isProduction ? 'inline-source-map' : false,
+
 		module: {
 			rules: [
 				{
-					test: /\.scss$/,
+					test: /\.css$/,
 					use: [
+						MiniCssExtractPlugin.loader,
 						{
-							loader: MiniCssExtractPlugin.loader
+							loader: 'css-loader',
+							options: {
+								importLoaders: 1
+							}
 						},
-						'css-loader',
-						'sass-loader'
+						{
+							loader: 'postcss-loader',
+							options: {
+								map: false,
+								plugins: () => [
+									require( 'postcss-nested' )(),
+									isProduction ? require( 'cssnano' )() : noop
+								]
+							}
+						}
 					]
 				},
 				{
@@ -82,3 +98,6 @@ module.exports = ( env = {} ) => {
 		]
 	};
 };
+
+function noop() {
+}
