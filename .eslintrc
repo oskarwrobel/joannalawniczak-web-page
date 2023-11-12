@@ -25,7 +25,6 @@
   "ignorePatterns": [
     "node_modules",
     "coverage",
-    "dist",
-    "src/analytics.js"
+    "dist"
   ]
 }

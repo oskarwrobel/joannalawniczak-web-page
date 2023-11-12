@@ -1,5 +1,6 @@
 /* eslint-env browser */
 
+import "./analytics";
 import "./styles/app.css";
 
 let timeIn: ReturnType<typeof setTimeout>;
