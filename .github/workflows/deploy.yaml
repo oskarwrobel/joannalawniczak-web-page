@@ -23,7 +23,7 @@ jobs:
       - name: rsync deployments
         uses: burnett01/rsync-deployments@6.0.0
         with:
-          switches: -avzr --delete --exclude="2020,metropolis"
+          switches: -avzr --delete --exclude="metropolis/" --exclude="2020/"
           path: dist/
           remote_path: ${{ secrets.DEPLOY_PATH }}
           remote_host: ${{ secrets.DEPLOY_HOST }}
