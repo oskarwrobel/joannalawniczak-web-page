@@ -19,7 +19,7 @@ jobs:
       run: npm run lint
 
     - name: Build
-      run: npm run build
+      run: ANALYTICS="UA-11153361-29" npm run build
 
     - name: Deploy to production
       if: github.ref == 'refs/heads/master'
