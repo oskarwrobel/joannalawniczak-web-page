@@ -1,8 +1,5 @@
 /* eslint-env browser */
 
-import "./analytics";
-import "./styles/app.css";
-
 let timeIn: ReturnType<typeof setTimeout>;
 let timeOut: ReturnType<typeof setTimeout>;
 const eyeElement = document.querySelector(".eye");
@@ -10,7 +7,9 @@ const eyeElement = document.querySelector(".eye");
 eyeElement.addEventListener("mouseenter", closeEye);
 eyeElement.addEventListener("mouseleave", openEye);
 
-openEye();
+export function init() {
+  openEye();
+}
 
 // ---------------------------------------------------------------------------- //
 
