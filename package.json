@@ -3,50 +3,31 @@
   "version": "0.0.1",
   "description": "Joanna Lawniczak home page.",
   "scripts": {
-    "lint": "eslint --quiet '**/*.js'",
-    "clean": "rm -rf ./dist",
-    "build": "webpack --mode development",
-    "build:production": "webpack --mode production --optimize-minimize --env.analytics=UA-11153361-29",
-    "build:metropolis": "webpack --config 'metropolis-web-page/webpack.config.js' --mode production --optimize-minimize --env.analytics=UA-11153361-29",
-    "build:2020": "webpack --config '2020-live-illustration/webpack.config.js' --mode production --optimize-minimize --env.analytics=UA-11153361-29",
-    "build:all": "npm run clean && npm run build:production && npm run build:metropolis && npm run build:2020",
-    "serve": "http-server ./dist/",
-    "deploy": "npm run lint && node ./dev/deploy"
+    "lint": "tsc --noEmit && eslint --quiet '**/*.{js,ts}' && prettier --check '**/*.css'",
+    "lint:fix": "eslint --fix '**/*.{js,ts}' && prettier --write '**/*.css'",
+    "start": "vite",
+    "preview": "vite preview",
+    "build": "vite build"
   },
   "author": "Oskar Wrobel",
-  "dependencies": {},
   "devDependencies": {
-    "@oskarwrobel/deploy-tools": "^1.3.3",
-    "copy-webpack-plugin": "^5.1.1",
-    "css-loader": "^3.4.2",
-    "cssnano": "^4.1.10",
-    "eslint": "^6.8.0",
-    "eslint-config-ckeditor5": "^2.1.0",
-    "file-loader": "^6.0.0",
-    "html-loader": "^1.1.0",
-    "html-webpack-plugin": "^4.0.4",
-    "http-server": "^0.12.1",
-    "husky": "^4.2.3",
-    "imports-loader": "^0.8.0",
-    "lint-staged": "^10.0.8",
-    "mini-css-extract-plugin": "^0.9.0",
-    "postcss-loader": "^3.0.0",
-    "postcss-nested": "^4.2.1",
-    "postcss-plugin": "^1.0.0",
-    "webpack": "^4.42.0",
-    "webpack-cli": "^3.3.11"
+    "@typescript-eslint/eslint-plugin": "^6.10.0",
+    "eslint": "^8.53.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.1.0",
+    "postcss-nesting": "^12.0.1",
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2",
+    "vite": "^4.5.0",
+    "vite-plugin-html": "^3.2.0"
   },
   "lint-staged": {
-    "**/*.js": [
+    "**/*.(ts|js)": [
       "eslint --quiet"
     ]
   },
-  "eslintIgnore": [
-    "dist/**",
-    "src/scripts/analytics.js",
-    "metropolis-web-page",
-    "2020-live-illustration"
-  ],
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
