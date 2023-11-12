@@ -1,5 +1,3 @@
-@import "animations.css";
-
 body,
 html {
   height: 100%;
@@ -16,8 +14,8 @@ body {
 @font-face {
   font-family: "ArcaMajora";
   src:
-    url("../fonts/ArcaMajora3-Bold.woff2") format("woff2"),
-    url("../fonts/ArcaMajora3-Bold.woff") format("woff");
+    url("./fonts/ArcaMajora3-Bold.woff2") format("woff2"),
+    url("./fonts/ArcaMajora3-Bold.woff") format("woff");
 }
 
 a {
@@ -47,25 +45,6 @@ main {
   margin-left: 10%;
   padding: 20px 0;
   width: 400px;
-
-  .eye {
-    margin-top: 90px;
-    display: inline-block;
-    width: 71px;
-    height: 40px;
-    background: url(../images/eye.svg) 0 0 no-repeat;
-    background-size: auto 40px;
-    animation: open 0.05s steps(2) forwards;
-    margin-bottom: 15px;
-
-    @media all and (max-width: 1200px) {
-      margin-top: 0;
-    }
-
-    &.eye-closed {
-      animation: close 0.05s steps(2, end) forwards;
-    }
-  }
 
   h1 {
     margin: 0 0 40px;
@@ -211,5 +190,17 @@ main {
 
   @media all and (max-width: 500px) {
     padding-top: 30px;
+  }
+}
+
+@keyframes jump {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+  100% {
+    transform: translateY(0);
   }
 }

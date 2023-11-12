@@ -1,5 +1,4 @@
-import { init } from "./scripts/app";
-import "./styles/app.css";
-import "./scripts/analytics";
+import "./components/app/app";
+import { eye } from "./components/eye/eye";
 
-init();
+eye();

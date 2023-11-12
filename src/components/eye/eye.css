@@ -1,0 +1,36 @@
+.eye {
+  margin-top: 90px;
+  display: inline-block;
+  width: 71px;
+  height: 40px;
+  background: url(./images/eye.svg) 0 0 no-repeat;
+  background-size: auto 40px;
+  animation: open 0.05s steps(2) forwards;
+  margin-bottom: 15px;
+
+  @media all and (max-width: 1200px) {
+    margin-top: 0;
+  }
+
+  &.eye-closed {
+    animation: close 0.05s steps(2, end) forwards;
+  }
+}
+
+@keyframes close {
+  0% {
+    background-position-x: 0;
+  }
+  100% {
+    background-position-x: -142px;
+  }
+}
+
+@keyframes open {
+  0% {
+    background-position-x: -142px;
+  }
+  100% {
+    background-position-x: 0;
+  }
+}
