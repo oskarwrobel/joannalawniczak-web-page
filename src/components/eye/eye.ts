@@ -7,6 +7,10 @@ export function eye() {
   let timeOut: ReturnType<typeof setTimeout>;
   const eyeElement = document.querySelector(".eye");
 
+  if (!eyeElement) {
+    return;
+  }
+
   eyeElement.addEventListener("mouseenter", closeEye);
   eyeElement.addEventListener("mouseleave", openEye);
   openEye();

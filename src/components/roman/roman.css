@@ -1,0 +1,11 @@
+.roman-wrapper {
+    display: flex;
+    gap: 30px;
+    flex-direction: row;
+    width: 100%;
+}
+
+.roman {
+    width: 600px;
+    max-width: 100%;
+}

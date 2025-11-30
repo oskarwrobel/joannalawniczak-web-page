@@ -32,5 +32,8 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "dependencies": {
+    "lottie-web": "^5.13.0"
   }
 }
